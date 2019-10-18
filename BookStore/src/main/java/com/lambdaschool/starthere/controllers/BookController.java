@@ -24,7 +24,6 @@ public class BookController
     @Autowired
     BookService bookService;
 
-    //students/students/paging?page=1&size=10&sort=studname
     @ApiOperation(value = "Return All Books w/Paging", response = Book.class, responseContainer = "List")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
@@ -54,5 +53,6 @@ public class BookController
         List<Book> myBooks = bookService.findAll();
         return new ResponseEntity<>(myBooks, HttpStatus.OK);
     }
+
 
 }

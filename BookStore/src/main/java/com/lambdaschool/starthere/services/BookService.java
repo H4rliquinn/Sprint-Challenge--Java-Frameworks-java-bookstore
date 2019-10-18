@@ -10,4 +10,10 @@ public interface BookService
     List<Book> findAllPageable(Pageable pageable);
 
     List<Book> findAll();
+
+    void update(Book updateBook,long id);
+
+    void updateBookAuthor(long bookid, long authorid);
+
+    void delete(long id);
 }
