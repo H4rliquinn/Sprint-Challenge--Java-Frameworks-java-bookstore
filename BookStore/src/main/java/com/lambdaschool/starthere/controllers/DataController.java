@@ -4,7 +4,10 @@ import com.lambdaschool.starthere.logging.Loggable;
 import com.lambdaschool.starthere.models.Book;
 import com.lambdaschool.starthere.models.User;
 import com.lambdaschool.starthere.services.BookService;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -35,14 +38,20 @@ public class DataController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+//    @ApiOperation(value = "Create New Student", response = Book.class)
+//    @ApiResponses(value = {@ApiResponse(code = 200, message = "Book Updated", response = Book.class),
+//            @ApiResponse(code = 400, message = "Incorrect Information", response = URISyntaxException.class)})
     @PostMapping(value = "/books/{bookid}/authors/{authorid}",
-            consumes = {"application/json"})
+            consumes = {"application/json"},
+            produces = {"application/json"})
     public ResponseEntity<?> AssignBookToAuthor(@PathVariable long bookid,
                                                 @PathVariable long authorid)
     {
-        bookService.updateBookAuthor(bookid,authorid);
+        Book newBook=bookService.updateBookAuthor(bookid,authorid);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        HttpHeaders responseHeaders = new HttpHeaders();
+
+        return new ResponseEntity<>(null,responseHeaders,HttpStatus.OK);
     }
 
     @DeleteMapping("/books/{id}")

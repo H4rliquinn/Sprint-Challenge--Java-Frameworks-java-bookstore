@@ -64,15 +64,13 @@ public class BookServiceImpl implements BookService
     }
 
     @Override
-    public void updateBookAuthor(long bookid, long authorid)
+    public Book updateBookAuthor(long bookid, long authorid)
     {
         Book book=bookRepos.findById(bookid).orElseThrow(()->new EntityNotFoundException());
         Author author=authorRepos.findById(authorid).orElseThrow(()->new EntityNotFoundException());
-        System.out.println("********");
-        System.out.println(book);
-        System.out.println(author);
         book.getAuthors().add(author);
-        bookRepos.save(book);
+        book= bookRepos.save(book);
+        return book;
     }
 
     @Override
