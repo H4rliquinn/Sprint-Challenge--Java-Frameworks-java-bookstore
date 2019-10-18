@@ -25,14 +25,14 @@ public class Book extends Auditable
 
     @ManyToOne
     @JoinColumn(name = "sectionid")
-    @JsonIgnoreProperties("section")
+    @JsonIgnoreProperties("books")
     private Section section;
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name = "wrote",
             joinColumns = {@JoinColumn(name = "bookid")},
             inverseJoinColumns = {@JoinColumn(name = "authorid")})
-    @JsonIgnoreProperties("authors")
+    @JsonIgnoreProperties("books")
     private List<Author> authors = new ArrayList<>();
 
     public Book()
